@@ -6,6 +6,24 @@ name: Maven Package
 on:
   release:
     types: [created]
+  push:
+    branches:
+      - main
+      - dev
+      - 'feature/*'
+      - 'hotfix/**'
+      - 'patch/**'
+    branches-ignore:
+      - experimental
+      - 'temp/**'
+  pull_request:
+    branches:
+      - main
+      - dev
+      - 'feature/*'
+      - 'hotfix/**'
+      - 'patch/**'
+      - 'temp/**'
 
 jobs:
   build:
