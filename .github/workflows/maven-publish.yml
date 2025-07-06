@@ -13,9 +13,6 @@ on:
       - 'feature/*'
       - 'hotfix/**'
       - 'patch/**'
-    branches-ignore:
-      - experimental
-      - 'temp/**'
   pull_request:
     branches:
       - main
