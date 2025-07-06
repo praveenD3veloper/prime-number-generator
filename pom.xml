@@ -78,6 +78,14 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>com.github.hazendaz.maven</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>4.7.0</version>
+				<configuration>
+					<repoToken>JDJWpovKMv2WL4LW829ZEIyaE8BqHz0sP</repoToken>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
