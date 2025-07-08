@@ -14,7 +14,15 @@ public class StrategySelector {
 
     @Autowired
     @Qualifier("bruteForce")
-    private PrimeGenerator bruteForcePrimeFinder;
+    private PrimeGenerator bruteForce;
+
+    @Autowired
+    @Qualifier("sieveOfEratosthenes")
+    private PrimeGenerator sieveOfEratosthenes;
+
+    @Autowired
+    @Qualifier("sieveOfEratosthenesInParallel")
+    private PrimeGenerator sieveOfEratosthenesInParallel;
 
     private Map<String, Supplier<PrimeGenerator>> strategyMap;
 
@@ -25,7 +33,9 @@ public class StrategySelector {
     @PostConstruct
     public void initializeStrategyMap() {
         strategyMap = new HashMap<>();
-        strategyMap.put("bruteforce", () -> bruteForcePrimeFinder);
+        strategyMap.put("bruteforce", () -> bruteForce);
+        strategyMap.put("sieveoferatosthenes", () -> sieveOfEratosthenes);
+        strategyMap.put("sieveoferatosthenesinparallel", () -> sieveOfEratosthenesInParallel);
     }
 
     /**
@@ -36,8 +46,11 @@ public class StrategySelector {
      *    If the provided algorithm is not matched then it proceeds uses default algo
      */
     public PrimeGenerator selectStrategy(final String requestedStrategy) {
+        if (requestedStrategy == null) {
+            return sieveOfEratosthenes;
+        }
         Supplier<PrimeGenerator> strategySupplier = strategyMap.getOrDefault(requestedStrategy.toLowerCase(), () -> {
-            return bruteForcePrimeFinder;
+            return sieveOfEratosthenes;
         });
 
         return strategySupplier.get();

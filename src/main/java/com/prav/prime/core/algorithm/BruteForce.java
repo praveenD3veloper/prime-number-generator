@@ -1,14 +1,12 @@
 package com.prav.prime.core.algorithm;
 
 import com.prav.prime.core.PrimeGenerator;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@Component
-public class BruteForcePrimeGenerator implements PrimeGenerator {
+public class BruteForce implements PrimeGenerator {
     /**
      * @param num is the range end for finding prime numbers
      * @return List of prime numbers found in the range
