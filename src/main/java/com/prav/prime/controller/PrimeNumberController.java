@@ -1,0 +1,37 @@
+package com.prav.prime.controller;
+
+import com.prav.prime.service.PrimeNumberService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/primes")
+@Slf4j
+public class PrimeNumberController {
+
+    /**
+     * service layer dependency.
+     */
+    @Autowired
+    private PrimeNumberService primeNumberService;
+
+    /**
+     *
+     * @param range to generate prime numbers
+     * @return list of prime numbers
+     */
+    @GetMapping("/{range}")
+    public List<Integer> getPrimes(@PathVariable("range") final int range) {
+        if (range <= 0) {
+            log.error("Invalid range provided in the request = {}", range);
+            throw new IllegalArgumentException("invalid range");
+        }
+       return primeNumberService.generatePrimeNumbersForRange(range);
+    }
+}
