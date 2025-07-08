@@ -6,6 +6,21 @@ name: Maven Package
 on:
   release:
     types: [created]
+  push:
+    branches:
+      - main
+      - dev
+      - 'feature/*'
+      - 'hotfix/**'
+      - 'patch/**'
+  pull_request:
+    branches:
+      - main
+      - dev
+      - 'feature/*'
+      - 'hotfix/**'
+      - 'patch/**'
+      - 'temp/**'
 
 jobs:
   build:
@@ -28,7 +43,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+#    - name: Publish to GitHub Packages Apache Maven
+#      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+#      env:
+#        GITHUB_TOKEN: ${{ github.token }}
