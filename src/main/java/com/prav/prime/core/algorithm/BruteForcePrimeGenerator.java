@@ -1,5 +1,6 @@
-package com.prav.prime.core;
+package com.prav.prime.core.algorithm;
 
+import com.prav.prime.core.PrimeGenerator;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -7,13 +8,13 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
-public class BruteForcePrimeGenerator {
+public class BruteForcePrimeGenerator implements PrimeGenerator {
     /**
-     *
-     * @param num input for the range
-     * @return list of primes
+     * @param num is the range end for finding prime numbers
+     * @return List of prime numbers found in the range
      */
-    public List<Integer> findPrimeNumbersInRange(final int num) {
+    @Override
+    public List<Integer> generatePrimeNumbersInRange(final int num) {
         return IntStream.rangeClosed(2, num)
                 .filter(this::isPrime)
                 .boxed()
