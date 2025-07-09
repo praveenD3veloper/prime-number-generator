@@ -63,18 +63,38 @@ public class CustomError {
      */
     private String message;
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     * Two {@code CustomError} objects are considered equal if all their significant fields
+     * (timestamp, url, statusCode, statusName, and message) are equal.
+     *
+     * @param obj the reference object with which to compare
+     * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise
+     */
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         CustomError other = (CustomError) obj;
-        return statusCode == other.statusCode &&
-                Objects.equals(timestamp, other.timestamp) &&
-                Objects.equals(url, other.url) &&
-                Objects.equals(statusName, other.statusName) &&
-                Objects.equals(message, other.message);
+        return statusCode == other.statusCode
+                && Objects.equals(timestamp, other.timestamp)
+                && Objects.equals(url, other.url)
+                && Objects.equals(statusName, other.statusName)
+                && Objects.equals(message, other.message);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     * This method is supported for the benefit of hash-based collections such as
+     * {@code HashMap}, {@code HashSet}, and {@code Hashtable}.
+     * The hash code is computed based on timestamp, url, statusCode, statusName, and message.
+     *
+     * @return a hash code value for this object
+     */
     @Override
     public int hashCode() {
         return Objects.hash(timestamp, url, statusCode, statusName, message);
