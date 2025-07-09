@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,6 +31,7 @@ public class PrimeNumberController {
      */
     @GetMapping(path = "/{range}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @ResponseBody
     public ResponseEntity<Result> getPrimes(@PathVariable("range") final int range) {
         if (range <= 0) {
             log.error("Invalid range provided in the request = {}", range);
