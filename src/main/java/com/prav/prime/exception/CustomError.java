@@ -2,12 +2,12 @@ package com.prav.prime.exception;
 
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * A model class representing a custom error response structure for REST APIs.
@@ -35,7 +35,6 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class CustomError {
 
     // @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
@@ -64,6 +63,22 @@ public class CustomError {
      */
     private String message;
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        CustomError other = (CustomError) obj;
+        return statusCode == other.statusCode &&
+                Objects.equals(timestamp, other.timestamp) &&
+                Objects.equals(url, other.url) &&
+                Objects.equals(statusName, other.statusName) &&
+                Objects.equals(message, other.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(timestamp, url, statusCode, statusName, message);
+    }
     /**
      * Returns a string representation of the error containing only the URL and message.
      *
