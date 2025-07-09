@@ -8,8 +8,6 @@ on:
     types: [created]
   push:
     branches:
-      - main
-      - dev
       - 'feature/*'
       - 'hotfix/**'
       - 'patch/**'
