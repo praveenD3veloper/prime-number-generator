@@ -95,11 +95,12 @@ class CustomExceptionHandlerTest {
 
     @Test
     void testHashCodeConsistencyForEqualObjects() {
+        LocalDateTime timeStamp = LocalDateTime.of(2024, 7, 6, 12, 0);
         String url = "http://example.com";
         String message = "Invalid input";
 
-        CustomError error1 = new CustomError(LocalDateTime.now(), url, 400, "Bad Request", message);
-        CustomError error2 = new CustomError(LocalDateTime.now(), url, 400, "Bad Request", message);
+        CustomError error1 = new CustomError(timeStamp, url, 400, "Bad Request", message);
+        CustomError error2 = new CustomError(timeStamp, url, 400, "Bad Request", message);
 
         // .equals() considers them equal due to overridden equals (based on url + message by default)
         assertEquals(error1, error2);
