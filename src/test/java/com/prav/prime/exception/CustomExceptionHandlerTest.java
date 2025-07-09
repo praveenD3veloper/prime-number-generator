@@ -17,20 +17,20 @@ class CustomExceptionHandlerTest {
 
     @Test
     void testEquals_EqualObjects() {
-        LocalDateTime timestamp1 = LocalDateTime.now();
+        LocalDateTime timeStamp = LocalDateTime.of(2025, 7, 8, 12, 0);
         String url1 = "http://example.com";
         int statusCode1 = 400;
         String statusName1 = "Bad Request";
         String message1 = "Invalid input";
 
-        LocalDateTime timestamp2 = LocalDateTime.now();
+        LocalDateTime timeStamp2 = LocalDateTime.of(2025, 7, 8, 12, 0);
         String url2 = "http://example.com";
         int statusCode2 = 400;
         String statusName2 = "Bad Request";
         String message2 = "Invalid input";
 
-        CustomError error1 = new CustomError(timestamp1, url1, statusCode1, statusName1, message1);
-        CustomError error2 = new CustomError(timestamp2, url2, statusCode2, statusName2, message2);
+        CustomError error1 = new CustomError(timeStamp, url1, statusCode1, statusName1, message1);
+        CustomError error2 = new CustomError(timeStamp2, url2, statusCode2, statusName2, message2);
 
         assertEquals(error1, error2);
         assertEquals(error2, error1);
@@ -38,13 +38,13 @@ class CustomExceptionHandlerTest {
 
     @Test
     void testEquals_DifferentObjects() {
-        LocalDateTime timestamp1 = LocalDateTime.now();
+        LocalDateTime timestamp1 = LocalDateTime.of(2025, 7, 8, 12, 0);
         String url1 = "http://example.com";
         int statusCode1 = 400;
         String statusName1 = "Bad Request";
         String message1 = "Invalid input";
 
-        LocalDateTime timestamp2 = LocalDateTime.now();
+        LocalDateTime timestamp2 = LocalDateTime.of(2026, 7, 8, 12, 0);
         String url2 = "http://another-example.com";
         int statusCode2 = 500;
         String statusName2 = "Internal Server Error";
@@ -95,7 +95,7 @@ class CustomExceptionHandlerTest {
 
     @Test
     void testHashCodeConsistencyForEqualObjects() {
-        LocalDateTime timeStamp = LocalDateTime.of(2024, 7, 6, 12, 0);
+        LocalDateTime timeStamp = LocalDateTime.of(2025, 7, 8, 12, 0);
         String url = "http://example.com";
         String message = "Invalid input";
 
