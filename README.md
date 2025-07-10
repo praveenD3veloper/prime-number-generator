@@ -1,7 +1,7 @@
 # Prime Number Generator 🔢
 
 [![Build](https://img.shields.io/github/actions/workflow/status/praveend3veloper/prime-number-generator/maven-publish.yml?branch=main)](https://github.com/praveend3veloper/prime-number-generator/actions)
-[![Coverage Status](https://coveralls.io/repos/github/praveenD3veloper/prime-number-generator/badge.svg?branch=main)](https://coveralls.io/github/praveenD3veloper/prime-number-generator?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/praveenD3veloper/prime-number-generator/badge.svg)](https://coveralls.io/github/praveenD3veloper/prime-number-generator)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=praveenD3veloper_prime-number-generator&metric=alert_status)](https://sonarcloud.io/dashboard?id=praveenD3veloper_prime-number-generator)
 [![License](https://img.shields.io/github/license/praveend3veloper/prime-number-generator)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-21-blue)](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
