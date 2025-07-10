@@ -19,10 +19,11 @@ public class PrimeNumberService {
     /**
      *
      * @param range from controller layer
+     * @param algorithm for strategy
      * @return result from core logic for generating prime list
      */
-    public List<Integer> generatePrimeNumbersForRange(final int range) {
-        PrimeGenerator primeGenerator =  strategySelector.selectStrategy(null);
+    public List<Integer> generatePrimeNumbersForRange(final int range, final String algorithm) {
+        PrimeGenerator primeGenerator =  strategySelector.selectStrategy(algorithm);
         return primeGenerator.generatePrimeNumbersInRange(range);
     }
 }
