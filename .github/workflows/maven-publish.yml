@@ -50,3 +50,8 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and deploy to GitHub Packages
+        run: mvn deploy -B
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
