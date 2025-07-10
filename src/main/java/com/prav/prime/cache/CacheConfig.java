@@ -31,10 +31,6 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 public class CacheConfig {
 
-    private static final int CAPACITY = 100;
-    private static final int MAX_SIZE = 1000;
-    private static final int EXPIRY_IN_MIN = 30;
-
     /**
      * Defines the {@link CacheManager} bean that uses Caffeine for caching.
      *
@@ -42,13 +38,6 @@ public class CacheConfig {
      */
     @Bean
     public CacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager("primeList");
-        cacheManager.setCaffeine(Caffeine.newBuilder()
-                .initialCapacity(CAPACITY)
-                .maximumSize(MAX_SIZE)
-                .expireAfterWrite(EXPIRY_IN_MIN, TimeUnit.MINUTES)
-                .recordStats());
-
-        return cacheManager;
+        return new CaffeineCacheManager("primeList");
     }
 }
