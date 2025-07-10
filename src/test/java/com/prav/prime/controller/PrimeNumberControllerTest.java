@@ -39,9 +39,9 @@ class PrimeNumberControllerTest {
         String algorithm = "bruteforce";
         Result expectedResult = new Result(10, List.of(2, 3, 5, 7));
 
-        when(primeNumberService.generatePrimeNumbersForRange(range)).thenReturn(List.of(2, 3, 5, 7));
+        when(primeNumberService.generatePrimeNumbersForRange(range, algorithm)).thenReturn(List.of(2, 3, 5, 7));
 
-        ResponseEntity<Result> response = primeNumberController.getPrimes(range);
+        ResponseEntity<Result> response = primeNumberController.getPrimes(range, algorithm);
 
         assert response.getStatusCode() == HttpStatus.OK;
         assert response.getBody() != null;
@@ -54,21 +54,21 @@ class PrimeNumberControllerTest {
         int range = -5;
         String algorithm = "bruteforce";
 
-        assertThrows(IllegalArgumentException.class, () -> primeNumberController.getPrimes(range));
+        assertThrows(IllegalArgumentException.class, () -> primeNumberController.getPrimes(range, algorithm));
     }
 
     @Test
     void testGetPrimeNumbers_ZeroRange() {
         int range = 0;
-        assertThrows(IllegalArgumentException.class, () -> primeNumberController.getPrimes(range));
+        assertThrows(IllegalArgumentException.class, () -> primeNumberController.getPrimes(range, null));
     }
 
     @Test
     void testGetPrimeNumbers_OneRange() {
         int range = 1;
-        when(primeNumberService.generatePrimeNumbersForRange(range)).thenReturn(Collections.emptyList());
+        when(primeNumberService.generatePrimeNumbersForRange(range, null)).thenReturn(Collections.emptyList());
 
-        ResponseEntity<Result> response = primeNumberController.getPrimes(range);
+        ResponseEntity<Result> response = primeNumberController.getPrimes(range, null);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -79,9 +79,9 @@ class PrimeNumberControllerTest {
     @Test
     void testGetPrimeNumbers_LargeRange() {
         int range = 100_000;
-        when(primeNumberService.generatePrimeNumbersForRange(range)).thenReturn(Collections.emptyList());
+        when(primeNumberService.generatePrimeNumbersForRange(range, null)).thenReturn(Collections.emptyList());
 
-        ResponseEntity<Result> response = primeNumberController.getPrimes(range);
+        ResponseEntity<Result> response = primeNumberController.getPrimes(range, null);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -91,9 +91,9 @@ class PrimeNumberControllerTest {
     @Test
     void testGetPrimeNumbers_ServiceReturnsEmptyList() {
         int range = 30;
-        when(primeNumberService.generatePrimeNumbersForRange(range)).thenReturn(Collections.emptyList());
+        when(primeNumberService.generatePrimeNumbersForRange(range, null)).thenReturn(Collections.emptyList());
 
-        ResponseEntity<Result> response = primeNumberController.getPrimes(range);
+        ResponseEntity<Result> response = primeNumberController.getPrimes(range, null);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());

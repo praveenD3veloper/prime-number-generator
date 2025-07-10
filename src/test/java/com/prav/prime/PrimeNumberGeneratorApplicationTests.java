@@ -16,4 +16,9 @@ class PrimeNumberGeneratorApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void mainMethodRunsWithoutExceptions() {
+		PrimeNumberGeneratorApplication.main(new String[] {});
+	}
+
 }
