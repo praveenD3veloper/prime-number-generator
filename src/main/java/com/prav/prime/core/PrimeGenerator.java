@@ -1,6 +1,5 @@
 package com.prav.prime.core;
 
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
