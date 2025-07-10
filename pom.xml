@@ -37,7 +37,7 @@
 	<repositories>
 		<repository>
 			<id>github</id>
-			<url>https://maven.pkg.github.com/praveenD3veloper/prime-number-generato</url>
+			<url>https://maven.pkg.github.com/praveenD3veloper/prime-number-generator</url>
 		</repository>
 	</repositories>
 	<properties>
