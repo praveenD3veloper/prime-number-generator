@@ -1,5 +1,6 @@
 package com.prav.prime.core;
 
+
 import java.util.List;
 
 public interface PrimeGenerator {
