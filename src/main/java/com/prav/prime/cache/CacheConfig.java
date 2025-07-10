@@ -1,5 +1,6 @@
 package com.prav.prime.cache;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  * The cache is initialized with specific capacity, size limits, and expiration policies.
  * </p>
  *
- * <p><b>Cache Settings:</b></p>
+ * <p><b>Cache Settings: from application properties</b></p>
  * <ul>
  *   <li>Initial capacity: 100 entries</li>
  *   <li>Maximum size: 1000 entries</li>
@@ -36,6 +37,9 @@ public class CacheConfig {
      */
     @Bean
     public CacheManager cacheManager() {
-        return new CaffeineCacheManager("primeList");
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager("primeList");
+        cacheManager.setCaffeine(Caffeine.newBuilder()
+                        .recordStats());
+        return cacheManager;
     }
 }
