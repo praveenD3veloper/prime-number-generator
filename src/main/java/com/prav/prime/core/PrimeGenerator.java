@@ -1,7 +1,10 @@
 package com.prav.prime.core;
 
+import org.springframework.cache.annotation.Cacheable;
+
 import java.util.List;
 
+@Cacheable("primeList")
 public interface PrimeGenerator {
     /**
      * @param range is the range end for finding prime numbers
