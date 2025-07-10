@@ -42,8 +42,12 @@ public class PrimeNumberController {
             log.error("Invalid range provided in the request = {}", range);
             throw new IllegalArgumentException("invalid range");
         }
+        log.info("Received Request with range = {}, algorithm = {}", range, algorithm);
 
         Result result = new Result(range, primeNumberService.generatePrimeNumbersForRange(range, algorithm));
-       return new ResponseEntity<>(result, HttpStatus.OK);
+        log.info("Responded to the request with range = {} , algorithm = {} with response = {}",
+                range, algorithm, result.getPrimes().toString());
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
