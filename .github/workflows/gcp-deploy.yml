@@ -35,7 +35,7 @@ jobs:
   build-and-deploy:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+#    if: github.ref == 'refs/heads/main'
 
     permissions:
       contents: read
@@ -86,9 +86,9 @@ jobs:
             --region=${{ env.REGION }} \
             --allow-unauthenticated \
             --memory 512Mi \
-            --cpu 1 \
+            --cpu 2 \
             --min-instances 0 \
-            --max-instances 10 \
+            --max-instances 3 \
             --port 8080 \
             --set-env-vars="SPRING_PROFILES_ACTIVE=prod"
 
