@@ -151,4 +151,21 @@ class CustomExceptionHandlerTest {
                 error.getMessage());
     }
 
+    @Test
+    void testRangeExceededException() {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        when(request.getRequestURL()).thenReturn(new StringBuffer("http://localhost/primes/1000000"));
+        when(request.getQueryString()).thenReturn(null);
+
+        RangeExceededException ex = new RangeExceededException("Range 1000000 exceeds maximum allowed range of 999999");
+
+        CustomError error = handler.rangeExceeded(request, ex);
+
+        assertEquals("http://localhost/primes/1000000", error.getUrl());
+        assertEquals(400, error.getStatusCode());
+        assertEquals("Bad Request", error.getStatusName());
+        assertEquals("Range exceeds maximum allowed limit of 999999. Please provide a smaller range value.",
+                error.getMessage());
+    }
+
 }

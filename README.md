@@ -13,15 +13,18 @@
 
 ## 📋 Table of Contents
 
-- [Features](#features)
-- [Architecture](#architecture)
-- [Usage](#usage)
-- [Build & Run](#build--run)
-- [Testing](#testing)
-- [API Reference](#api-reference)
-- [Extending Algorithms](#extending-algorithms)
-- [Contributing](#contributing)
-- [License](#license)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Usage](#-usage)
+- [Build & Run](#-build--run)
+- [Testing](#-testing)
+- [API Reference](#-api-reference)
+- [Algorithm Information](#-algorithm-information)
+- [Docker Setup](#-docker-setup)
+- [Cloud Run Deployment](#-cloud-run-deployment)
+- [Extending Algorithms](#-extending-algorithms)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 

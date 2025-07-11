@@ -1,6 +1,7 @@
 package com.prav.prime.controller;
 
 
+import com.prav.prime.exception.RangeExceededException;
 import com.prav.prime.model.response.Result;
 import com.prav.prime.service.PrimeNumberService;
 import org.junit.jupiter.api.BeforeEach;
@@ -100,4 +101,27 @@ class PrimeNumberControllerTest {
         assertEquals(range, response.getBody().getInitial());
         assertTrue(response.getBody().getPrimes().isEmpty());
     }
+    @Test
+    void testGetPrimeNumbers_ExceedsMaxRange() {
+        int range = 1_000_000; // just above MAX_RANGE
+
+        RangeExceededException thrown = assertThrows(RangeExceededException.class, () -> {
+            primeNumberController.getPrimes(range, null);
+        });
+
+        assertEquals("Range 1000000 exceeds maximum allowed range of 999999", thrown.getMessage());
+    }
+
+    @Test
+    void testGetPrimeNumbers_AtMaxRange() {
+        int range = 999_999;
+        when(primeNumberService.generatePrimeNumbersForRange(range, null)).thenReturn(Collections.emptyList());
+
+        ResponseEntity<Result> response = primeNumberController.getPrimes(range, null);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(range, response.getBody().getInitial());
+        assertTrue(response.getBody().getPrimes().isEmpty());
+    }
+
 }

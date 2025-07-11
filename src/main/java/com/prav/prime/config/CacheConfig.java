@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.prav.prime.constant.UtilityConstants.MAX_SIZE;
+
 
 /**
  * CacheConfig configures a {@link CacheManager} backed by Caffeine for use in the Spring context.
@@ -33,8 +35,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Configuration
 @EnableCaching
 public class CacheConfig {
-
-    private static final int MAX_SIZE = 1000;
 
     /**
      * Defines the {@link CacheManager} bean that uses Caffeine for caching.

@@ -11,9 +11,9 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SieveOfEratosthenesParallel implements PrimeGenerator {
+import static com.prav.prime.constant.UtilityConstants.MAX_CHUNKS;
 
-    private static final int MAX_CHUNKS = 6;
+public class SieveOfEratosthenesParallel implements PrimeGenerator {
 
     /**
      *

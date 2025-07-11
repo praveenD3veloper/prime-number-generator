@@ -62,7 +62,20 @@ public class CustomExceptionHandler {
         return new CustomError(LocalDateTime.now(),  reqUrl(req), HttpStatus.BAD_REQUEST.value(),
                 HttpStatus.BAD_REQUEST.getReasonPhrase(), e.getMessage());
     }
-
+    /**
+     * Handles {@link RangeExceededException} when the requested range exceeds the maximum allowed limit.
+     *
+     * @param req the HTTP request causing the error
+     * @param e   the thrown exception
+     * @return a structured {@link CustomError} response with a 400 BAD_REQUEST status
+     */
+    @ExceptionHandler(RangeExceededException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public CustomError rangeExceeded(final HttpServletRequest req, final RangeExceededException e) {
+        return new CustomError(LocalDateTime.now(), reqUrl(req),
+                HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                "Range exceeds maximum allowed limit of 999999. Please provide a smaller range value.");
+    }
 
     /**
      * Utility method to construct the full request URL including query parameters.
