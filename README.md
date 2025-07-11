@@ -121,24 +121,135 @@ java -jar target/prime-number-generator-*.jar
 ./mvnw test
 ```
 
-### Test Coverage (manual)
+## 🧪 Test Coverage
 
-Use tools like JaCoCo if integrated.
+Use tools like JaCoCo if integrated. For comprehensive coverage reporting and analysis, consider:
+
+- **☁️ SonarQube Cloud**: Provides detailed code quality metrics, test coverage analysis, and security vulnerability detection with seamless CI/CD integration
+- **📊 Coveralls**: Offers coverage tracking and reporting with pull request integration, supporting multiple languages and build systems
+- **☕ JaCoCo**: Java-specific coverage tool that generates detailed reports and integrates well with Maven/Gradle builds
+
+**Generate JaCoCo Report Locally:**
+```bash
+mvn clean test jacoco:report
+```
+
+**Report Location:** `target/site/jacoco/index.html`
+
+These tools can be configured to automatically generate coverage reports and provide insights into code quality trends over time.
+
 
 ---
 
 ## 📡 API Reference
 
-| Method | Endpoint | Description | Query Param |
-|--------|----------|-------------|-------------|
-| GET | `/primes/{range}` | Get all primes ≤ range | `algo` (optional: bruteforce, sieve, parallel) |
+| Method | Endpoint | Description | Query Param                                                                            |
+|--------|----------|-------------|----------------------------------------------------------------------------------------|
+| GET | `/primes/{range}` | Get all primes ≤ range | `algorithm` (optional: bruteForce, sieveOfEratosthenes, sieveOfEratosthenesInParallel) |
 
 Example:
 
 ```bash
-GET /primes/100?algo=parallel
+GET /primes/100?algorithm=parallel
+```
+## 🧮 Algorithm Information
+
+The Prime Number Generator service supports multiple algorithms with varying performance characteristics:
+
+### 🐌 Brute Force Algorithm
+**Description:** The most basic and inefficient approach that checks divisibility for every number up to the target.
+
+**Usage:** Add `?algorithm=bruteForce` to your request
+```bash
+# Local development
+curl http://localhost:8080/primes/100?algorithm=bruteForce
+
+# Production service
+curl https://github-action-deploy-foun5bafea-nw.a.run.app/primes/100?algorithm=bruteForce
 ```
 
+### 🎯 Sieve of Eratosthenes (Default)
+**Description:** A more efficient algorithm that eliminates multiples of known primes. This is the **default implementation** used when no algorithm is specified or an invalid algorithm is provided.
+
+**Usage:**
+```bash
+# Explicit algorithm selection
+curl http://localhost:8080/primes/100?algorithm=SieveOfEratosthenes
+
+# Default behavior (no algorithm parameter)
+curl http://localhost:8080/primes/100
+```
+
+### ⚡ Sieve of Eratosthenes in Parallel
+**Description:** An optimized concurrent implementation that leverages Java's multithreading capabilities to achieve superior performance for larger number ranges.
+
+**Usage:** Add `?algorithm=SieveOfEratosthenesInParallel` to your request
+```bash
+# Local development
+curl http://localhost:8080/primes/100?algorithm=SieveOfEratosthenesInParallel
+
+# Production service
+curl https://github-action-deploy-foun5bafea-nw.a.run.app/primes/100?algorithm=SieveOfEratosthenesInParallel
+```
+
+### 📊 Performance Comparison
+
+| Algorithm | Performance | Use Case |
+|-----------|-------------|----------|
+| 🐌 Brute Force | Slowest | Educational/Testing |
+| 🎯 Sieve of Eratosthenes | Good | General purpose |
+| ⚡ Parallel Sieve | Fastest | Large number ranges |
+
+> **💡 Tip:** For optimal performance with large ranges (>10,000), use the parallel implementation.
+
+---
+
+## 🐳 Docker Setup
+
+### 📦 Build the Docker Image
+
+First, ensure your Spring Boot application is compiled:
+
+```bash
+docker build -t prime-number-generator .
+```
+
+## 🚀 Run the Container Locally
+### Run the container with port mapping:
+```bash
+docker run -p 8080:8080 prime-number-generator
+```
+## 🔍 Verify the Application
+### Once the container is running, test the application:
+```bash
+# Check if the application is responding
+curl http://localhost:8080/actuator/health
+```
+---
+
+## ☁️ Cloud Run Deployment
+
+This repository has a **GitHub Actions workflow** configured for **continuous deployment**. Every merge to the main branch and pull request automatically triggers:
+
+- 🔨 **Build** - Compiles and packages the application
+- 🐳 **Containerize** - Creates Docker image using distroless Java 21
+- 🚀 **Deploy** - Pushes to Google Cloud Run service
+
+⚡ Cold Start Notice
+
+📢 Important: Cloud Run is a serverless platform that scales to zero when idle. The service may experience a cold start (2-3 seconds delay) on the first request after an idle period. Subsequent requests will be fast and responsive.
+### 🌐 Service Endpoint
+
+**Base URL:** `https://prime-generator-6v2nx24hua-nw.a.run.app`
+
+**API Endpoint:** `/primes/{range}`
+
+### 📝 Example Usage
+
+```bash
+# Get prime numbers up to 10
+curl https://https://prime-generator-6v2nx24hua-nw.a.run.app/primes/10?algorithm=bruteForce
+```
 ---
 
 ## 🧩 Extending Algorithms
@@ -156,8 +267,9 @@ To add a new algorithm:
 - **Java**: 21+
 - **Build Tool**: Maven (Wrapper included)
 - **Code Style**: Sun Java conventions via `sun_checks.xml`
-- **CI/CD**: GitHub Actions (`.github/workflows/maven-publish.yml`)
-
+- **CI/CD**: GitHub Actions (`.github/workflows/maven-publish.yml`) (`.github/workflows/gcp-deploy.yml`)
+- **Infra**: Google Cloud
+ 
 ---
 
 ## 🤝 Contributing
@@ -172,22 +284,12 @@ To add a new algorithm:
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the GPL License.
 
 ---
 
 ## 👤 Author
-
-**Praveen D**
 - GitHub: [@praveend3veloper](https://github.com/praveend3veloper)
 - 📧 Email/contact info can go here if public
 
 ---
-
-*Let me know if you'd like:*
-- *A visual logo/banner*
-- *Docker support added to README*
-- *Shields for coverage or JDK compatibility*
-- *Swagger/OpenAPI integration section*
-
-*I can tailor this further depending on audience (tech recruiters, OSS contributors, etc.).*
