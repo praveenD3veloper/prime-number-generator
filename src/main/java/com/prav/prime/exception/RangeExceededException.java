@@ -1,11 +1,14 @@
 package com.prav.prime.exception;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * Custom exception thrown when the requested range exceeds the maximum allowed limit.
  * <p>
  * This exception is used to indicate that a user has requested a range that is too large
  * for the prime number generation service to handle efficiently or safely.
  */
+@RequiredArgsConstructor
 public class RangeExceededException extends RuntimeException {
 
     /**
