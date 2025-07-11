@@ -11,6 +11,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.prav.prime.constant.UtilityConstants.MAX_REQUESTS_PER_MINUTE;
+import static com.prav.prime.constant.UtilityConstants.MIN_INTERVAL_BETWEEN_REQUESTS_MS;
+
 
 /**
  * Interceptor to apply basic rate limiting and enforce throttling per client IP address.
@@ -19,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * <p>This interceptor uses a {@link com.github.benmanes.caffeine.cache.Cache} to track the number of
  * requests from each client IP within a 1-minute window. If the number of requests exceeds
- * {@link #MAX_REQUESTS_PER_MINUTE}, the request is rejected with HTTP 429 (Too Many Requests).
+ * the request is rejected with HTTP 429 (Too Many Requests).
  *
  * <p>Configured via {@link com.prav.prime.config.WebConfig}.
  *
@@ -30,12 +33,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequiredArgsConstructor
 @Slf4j
 public class RateLimitingInterceptor implements HandlerInterceptor {
-
-    /**
-     * The maximum number of allowed requests per minute per IP address.
-     */
-    private static final int MAX_REQUESTS_PER_MINUTE = 5;
-    private static final long MIN_INTERVAL_BETWEEN_REQUESTS_MS = 1000; // 0.5 second
 
     /**
      * A Caffeine cache to track request counts for each client IP.

@@ -1,5 +1,6 @@
 package com.prav.prime.controller;
 
+import com.prav.prime.exception.RangeExceededException;
 import com.prav.prime.model.response.Result;
 import com.prav.prime.service.PrimeNumberService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.prav.prime.constant.UtilityConstants.BASE_URL;
+import static com.prav.prime.constant.UtilityConstants.MAX_RANGE;
+
 @RestController
-@RequestMapping("/primes")
+@RequestMapping(BASE_URL)
 @Slf4j
 public class PrimeNumberController {
 
@@ -41,6 +45,10 @@ public class PrimeNumberController {
         if (range <= 0) {
             log.error("Invalid range provided in the request = {}", range);
             throw new IllegalArgumentException("invalid range");
+        }
+        if (range > MAX_RANGE) {
+            log.error("Requested range {} exceeds maximum allowed range of {}", range, MAX_RANGE);
+            throw new RangeExceededException("Range " + range + " exceeds maximum allowed range of " + MAX_RANGE);
         }
         log.info("Received Request with range = {}, algorithm = {}", range, algorithm);
 
