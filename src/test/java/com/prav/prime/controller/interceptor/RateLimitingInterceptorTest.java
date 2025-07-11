@@ -28,7 +28,7 @@ class RateLimitingInterceptorTest {
 
     private StringWriter responseWriter;
 
-    private static final int MAX_REQUESTS_PER_MINUTE = 5;
+    private static final int MAX_REQUESTS_PER_MINUTE = 10;
     private static final long MIN_INTERVAL_BETWEEN_REQUESTS_MS = 1000L;
 
     @BeforeEach
