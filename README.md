@@ -78,18 +78,29 @@ Run the app locally:
 Sample API:
 
 ```bash
-GET /primes/30?algo=sieve
+GET /primes/30?algorithm=bruteForce
 ```
 
-Response:
+Response: (Based on Optional MediaType in request header)
 
 ```json
 {
-  "initial": 30,
-  "primes": [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+  "initial": 10,
+  "primes": [2, 3, 5, 7]
 }
 ```
-
+Or
+```XML
+<Result>
+<initial>10</initial>
+<primes>
+<primes>2</primes>
+<primes>3</primes>
+<primes>5</primes>
+<primes>7</primes>
+</primes>
+</Result>
+```
 ---
 
 ## 🛠️ Build & Run
@@ -103,7 +114,7 @@ Response:
 ### Package JAR
 
 ```bash
-./mvnw package
+./mvnw clean package
 ```
 
 JAR will be located in `target/prime-number-generator-<version>.jar`
@@ -165,10 +176,7 @@ The Prime Number Generator service supports multiple algorithms with varying per
 **Usage:** Add `?algorithm=bruteForce` to your request
 ```bash
 # Local development
-curl http://localhost:8080/primes/100?algorithm=bruteForce
-
-# Production service
-curl https://github-action-deploy-foun5bafea-nw.a.run.app/primes/100?algorithm=bruteForce
+GET http://localhost:8080/primes/100?algorithm=bruteForce
 ```
 
 ### 🎯 Sieve of Eratosthenes (Default)
@@ -177,10 +185,10 @@ curl https://github-action-deploy-foun5bafea-nw.a.run.app/primes/100?algorithm=b
 **Usage:**
 ```bash
 # Explicit algorithm selection
-curl http://localhost:8080/primes/100?algorithm=SieveOfEratosthenes
+GET http://localhost:8080/primes/100?algorithm=SieveOfEratosthenes
 
 # Default behavior (no algorithm parameter)
-curl http://localhost:8080/primes/100
+GET http://localhost:8080/primes/100
 ```
 
 ### ⚡ Sieve of Eratosthenes in Parallel
@@ -189,10 +197,10 @@ curl http://localhost:8080/primes/100
 **Usage:** Add `?algorithm=SieveOfEratosthenesInParallel` to your request
 ```bash
 # Local development
-curl http://localhost:8080/primes/100?algorithm=SieveOfEratosthenesInParallel
+GET http://localhost:8080/primes/100?algorithm=SieveOfEratosthenesInParallel
 
 # Production service
-curl https://github-action-deploy-foun5bafea-nw.a.run.app/primes/100?algorithm=SieveOfEratosthenesInParallel
+GET https://prime-generator-6v2nx24hua-nw.a.run.app/primes/100?algorithm=SieveOfEratosthenesInParallel
 ```
 
 ### 📊 Performance Comparison
